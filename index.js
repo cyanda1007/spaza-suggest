@@ -1,10 +1,10 @@
-const express = require("express");
-const exphbs = require("express-handlebars");
-const bodyParser = require("body-parser");
-const flash = require("express-flash");
-const session = require("express-session");
-const SpazSug = require("./spaza-suggest")();
-const pgp = require("pg-promise")();
+import express from "express";
+import exphbs from "express-handlebars";
+import bodyParser from "body-parser";
+import flash from "express-flash";
+import session from "express-session";
+import SpazSug from "../spaza-suggest.js";
+import pgp from "pg-promise";
 const DATABASE_URL =
   process.env.DATABASE_URL ||
   "postgresql://postgres:Cyanda@100%@localhost:5432/spaza_suggest";
@@ -43,7 +43,7 @@ const Spaza = SpazSug(db);
 app.use(bodyParser.json());
 
 app.post("/registerSpaza", Spaza.registerClient(username));
-app.get("/", Spaza.registerClient(username))
+app.get("/", Spaza.registerClient(username));
 
 const PORT = process.env.PORT || 3007;
 
