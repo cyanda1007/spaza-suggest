@@ -2,11 +2,11 @@ import ShortUniqueId from "short-unique-id";
 
 export default function SpazaSuggest(db) {
   const uid = new ShortUniqueId({ length: 5 });
-
+  
   //// returns client code
   async function registerClient(username) {
     // get the code
-
+    
     const uniqCode = uid();
     await db.none(`insert into spaza_client (username, code) values ($1, $2)`, [
       username,

@@ -3,7 +3,7 @@ const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser");
 const flash = require("express-flash");
 const session = require("express-session");
-const SpazSug = require("./spaza-suggest");
+const SpazSug = require("./spaza-suggest")();
 const pgp = require("pg-promise")();
 const DATABASE_URL =
   process.env.DATABASE_URL ||
@@ -42,7 +42,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const Spaza = SpazSug(db);
 app.use(bodyParser.json());
 
-app.post("/registerSpaza", SpazSug.registerClient());
+app.post("/registerSpaza", Spaza.registerClient(username));
+app.get("/", Spaza.registerClient(username))
 
 const PORT = process.env.PORT || 3007;
 
